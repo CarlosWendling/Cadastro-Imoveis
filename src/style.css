@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.login-form {
+    width: 28rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem 3rem;
+    box-shadow: 1px 1px 5px rgb(0, 0, 0, 0.7);
+
+    p {
+        display: flex;
+        justify-content: center;
+        font-size: 0.9rem;
+    }
+}
