@@ -1,5 +1,39 @@
 <?php
-include('conexao.php')
+include('conexao.php');
+
+// Verifivando a existência do email e da senha
+if (isset($_POST['email']) && isset($_POST['senha'])) {
+
+    if (strlen($_POST['email']) == 0) {
+        echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 50%; transform: translate(-50%, 0); z-index: 5;">Preencha o campo de email.</p>';
+    } else if (strlen($_POST['senha']) == 0) {
+        echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 50%; transform: translate(-50%, 0); z-index: 5;">Preencha com a sua senha.</p>';
+    } else {
+        // Limpar a string da variável
+        $email = $mysqli->real_escape_string($_POST['email']);
+        $senha = $mysqli->real_escape_string($_POST['senha']);
+
+        $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
+        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: ".$mysqli->error);
+
+        $quantidade = $sql_query->num_rows;
+
+        if ($quantidade == 1) {
+            $usuario = $sql_query->fetch_assoc();
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+
+            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['nome'] = $usuario['nome'];
+
+            header("Location: menu.php");
+        } else {
+            echo 'Falha ao logar. Email ou senha incorretos';
+        }
+    }
+}
 ?>
 
 <!doctype html>
@@ -34,14 +68,14 @@ include('conexao.php')
     <main>
         <h1>Login</h1>
         
-        <form class="login-form">
+        <form class="login-form" method="post">
             <div class="mb-3">
                 <label for="login-email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="login-email" name="user-email" require>
+                <input type="email" class="form-control" id="login-email" name="email" require>
             </div>
             <div class="mb-3">
                 <label for="login-pass" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="login-pass" name="user-pass" require>
+                <input type="password" class="form-control" id="login-pass" name="senha" require>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary form-control" value="entrar" style="margin-top: 0.4rem;">Entrar</button>
