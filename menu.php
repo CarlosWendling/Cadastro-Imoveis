@@ -35,6 +35,10 @@
         <h1>Menu</h1>
 
         <p>Bem vindo, </p> <?php echo $_SESSION['nome']; ?>
+
+        <p>
+            <a href="logout.php">Sair</a>
+        </p>
         
     </main>
 
