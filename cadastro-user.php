@@ -1,3 +1,9 @@
+<?php
+include('conexao.php');
+
+?>
+
+
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -31,9 +37,71 @@
         <h1 style="margin-top: 4rem;">Cadastro</h1>
         
         <form class="user-form" method="post">
+
+            <?php
+                $error = 0;
+
+                if (isset($_POST['nome'])) {
+                    $nome = $_POST['nome'];
+                    if (strlen($nome) < 6) {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">O nome deve ter, no mínimo, 6 caracteres.</p>';
+                    }
+                }
+
+                if (isset($_POST['email'])) {
+                    $email = $_POST['email'];
+
+                    $sql_code = "SELECT * FROM usuarios WHERE email = '$email'";
+                    $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: ".$mysqli->error);
+
+                    $quantidade = $sql_query->num_rows;
+
+                    if ($quantidade == 0) {
+                        
+                    } else {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">Email já cadastrado.</p>';
+                    }
+                }
+
+                if (isset($_POST['senha'])) {
+                    $senha = $_POST['senha'];
+                    $confirmSenha = $_POST['confirm-senha'];
+
+                    if (strlen($senha) < 7) {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">Senha muito curta.</p>';
+                    } else if (!preg_match('/[a-z]/', $senha)) {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">Senha não contém letras minúsculas.</p>';
+                    } else if (!preg_match('/[0-9]/', $senha)) {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">Senha não contém números.</p>';
+                    } else if ($senha != $confirmSenha) {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">Senhas não coincidem.</p>';
+                    }
+                }
+
+                if ($error == 0 && isset($_POST['cadastrar'])) {
+                    session_start(); 
+
+                    $nome = mysqli_real_escape_string($mysqli, trim($_POST['nome']));
+                    $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+                    $senha = mysqli_real_escape_string($mysqli, trim($_POST['senha']));
+
+                    $sql_code = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
+                    
+                    mysqli_query($mysqli, $sql_code);
+                    echo '<div class="alert alert-success" role="alert" >Cadastrado com Sucesso!</div>';
+                }
+            ?>
+
             <div class="mb-3">
                 <label for="cadastro-nome" class="form-label">Nome Completo</label>
                 <input type="text" class="form-control" id="cadastro-nome" name="nome" require>
+                <p class="fail-email" style="color: red; font-size: 0.6rem;"></p>
             </div>
             <div class="mb-3">
                 <label for="cadastro-email" class="form-label">Email</label>
@@ -48,10 +116,10 @@
                 <input type="password" class="form-control" id="confirm-pass" name="confirm-senha" require>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary form-control" value="entrar" style="margin-top: 0.4rem;">Entrar</button>
+                <button type="submit" class="btn btn-primary form-control" name="cadastrar" style="margin-top: 0.4rem;">Entrar</button>
             </div>
             <div class="mb-3">
-                <p>Já possui Cadastro? <a href="./index.php">Clique aqui</a></p>
+                <p class="msg">Já possui Cadastro? <a href="./index.php">Clique aqui</a></p>
             </div>
         </form>
     </main>

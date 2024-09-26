@@ -30,7 +30,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
 
             header("Location: menu.php");
         } else {
-            echo 'Falha ao logar. Email ou senha incorretos';
+            echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 49%; transform: translate(-50%, 0); z-index: 5;">Falha ao Logar. Email ou Senha incorretos.</p>';
         }
     }
 }
@@ -81,7 +81,7 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
                 <button type="submit" class="btn btn-primary form-control" value="entrar" style="margin-top: 0.4rem;">Entrar</button>
             </div>
             <div class="mb-3">
-                <p>Ainda não possui Cadastro? <a href="./cadastro-user.php">Clique aqui</a></p>
+                <p class="msg">Ainda não possui Cadastro? <a href="./cadastro-user.php">Clique aqui</a></p>
             </div>
         </form>
     </main>
