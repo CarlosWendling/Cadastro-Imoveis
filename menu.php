@@ -1,5 +1,6 @@
 <?php
-    include('protect.php')
+    include('protect.php');
+    include('conexao.php');
 ?>
 
 <!doctype html>
@@ -31,17 +32,30 @@
         </div>
     </nav>
 
-    <main>
-        <h1>Menu</h1>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" style="padding-top: 1.1rem;">
+                        <h4>
+                            <span class="align-middle">Menu </span>
+                            <div class="dropdown" style="display: inline;">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Selecione
+                                </a>
 
-        <p>Bem vindo, </p> <?php echo $_SESSION['nome']; ?>
-
-        <p>
-            <a href="logout.php">Sair</a>
-        </p>
-        
-    </main>
-
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Proprietários</a></li>
+                                    <li><a class="dropdown-item" href="#">Imóveis</a></li>
+                                </ul>
+                            </div>
+                            <a href="logout.php" class="btn btn-primary float-end">Sair</a>                  
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
