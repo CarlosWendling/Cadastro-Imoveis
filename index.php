@@ -71,11 +71,11 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
         <form class="user-form" method="post">
             <div class="mb-3">
                 <label for="login-email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="login-email" name="email" require>
+                <input type="email" class="form-control" id="login-email" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="login-pass" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="login-pass" name="senha" require>
+                <input type="password" class="form-control" id="login-pass" name="senha" required>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary form-control" value="entrar" style="margin-top: 0.4rem;">Entrar</button>

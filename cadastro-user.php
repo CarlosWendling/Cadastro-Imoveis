@@ -100,20 +100,20 @@ include('conexao.php');
 
             <div class="mb-3">
                 <label for="cadastro-nome" class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="cadastro-nome" name="nome" require>
+                <input type="text" class="form-control" id="cadastro-nome" name="nome" required>
                 <p class="fail-email" style="color: red; font-size: 0.6rem;"></p>
             </div>
             <div class="mb-3">
                 <label for="cadastro-email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="cadastro-email" name="email" require>
+                <input type="email" class="form-control" id="cadastro-email" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="cadastro-pass" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="cadastro-pass" name="senha" require>
+                <input type="password" class="form-control" id="cadastro-pass" name="senha" required>
             </div>
             <div class="mb-3">
                 <label for="confirm-pass" class="form-label">Confirme a Senha</label>
-                <input type="password" class="form-control" id="confirm-pass" name="confirm-senha" require>
+                <input type="password" class="form-control" id="confirm-pass" name="confirm-senha" required>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary form-control" name="cadastrar" style="margin-top: 0.4rem;">Entrar</button>

@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                             <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
-                            <a href="#" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Proprietário</a>             
+                            <a href="adicionar-proprietario.php" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Proprietário</a>         
                         </h4>
                     </div>
                     <div class="card-body">
@@ -68,14 +68,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $sql_code = 'SELECT * FROM proprietarios';
+                                    $proprietarios = mysqli_query($mysqli, $sql_code);
+
+                                    if (mysqli_num_rows($proprietarios) > 0) {
+                                        foreach($proprietarios as $proprietario) {       
+                                ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Cadu</td>
-                                    <td>05/10/2004</td>
-                                    <td>00000000000</td>
-                                    <td>Masculino</td>
-                                    <td>0000000000</td>
-                                    <td>cadu@gmail.com</td>
+                                    <td><?=$proprietario['id']?></td>
+                                    <td><?=$proprietario['nome']?></td>
+                                    <td><?=$proprietario['data_nascimento']?></td>
+                                    <td><?=$proprietario['cpf']?></td>
+                                    <td><?=$proprietario['sexo']?></td>
+                                    <td><?=$proprietario['telefone']?></td>
+                                    <td><?=$proprietario['email']?></td>
                                     <td>
                                         <a href="" class="btn btn-secondary btn-sm">Visualizar</a>
                                         <a href="" class="btn btn-success btn-sm">Editar</a>
@@ -86,6 +93,12 @@
                                         </form>
                                     </td>
                                 </tr>
+                                <?php
+                                 }
+                                } else {
+                                    echo '<h5>Nenhum Proprietário encontrado.</5>';
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
