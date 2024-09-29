@@ -78,7 +78,7 @@
                                 <tr>
                                     <td><?=$proprietario['id']?></td>
                                     <td><?=$proprietario['nome']?></td>
-                                    <td><?=$proprietario['data_nascimento']?></td>
+                                    <td><?=date('d/m/Y', strtotime($proprietario['data_nascimento']))?></td>
                                     <td><?=$proprietario['cpf']?></td>
                                     <td><?=$proprietario['sexo']?></td>
                                     <td><?=$proprietario['telefone']?></td>
