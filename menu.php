@@ -45,7 +45,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="gerenciar-proprietario">Proprietários</a></li>
+                                    <li><a class="dropdown-item" href="gerenciar-proprietario.php">Proprietários</a></li>
                                     <li><a class="dropdown-item" href="#">Imóveis</a></li>
                                 </ul>
                             </div>
