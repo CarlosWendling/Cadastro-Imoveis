@@ -37,4 +37,14 @@ if (isset($_POST['update_proprietario'])) {
     header("Location: gerenciar-proprietario.php");
     
 }
+
+if (isset($_POST['delete_proprietario'])) {
+    $usuario_id = mysqli_real_escape_string($mysqli, $_POST['delete_proprietario']);
+    
+    $sql_code = "DELETE FROM proprietarios WHERE id = '$usuario_id'";
+
+    mysqli_query($mysqli, $sql_code);
+
+    header("Location: gerenciar-proprietario.php");
+}
 ?>

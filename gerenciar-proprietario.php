@@ -86,8 +86,8 @@
                                     <td>
                                         <a href="proprietario-view.php?id=<?=$proprietario['id']?>" class="btn btn-secondary btn-sm">Visualizar</a>
                                         <a href="proprietario-edit.php?id=<?=$proprietario['id']?>" class="btn btn-success btn-sm">Editar</a>
-                                        <form action="" method="post" class="d-inline">
-                                            <button type="submit" name="delete_proprietario" value="1" class="btn btn-danger btn-sm">
+                                        <form onclick="return confirm('Tem certeza que deseja excluir esse proprietário?')" action="acoes.php" method="post" class="d-inline">
+                                            <button type="submit" name="delete_proprietario" value="<?=$proprietario['id']?>" class="btn btn-danger btn-sm">
                                                 Excluir
                                             </button>
                                         </form>
@@ -96,7 +96,7 @@
                                 <?php
                                  }
                                 } else {
-                                    echo '<h5>Nenhum Proprietário encontrado.</5>';
+                                    echo '<h5>Nenhum Proprietário encontrado</5>';
                                 }
                                 ?>
                             </tbody>
