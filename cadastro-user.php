@@ -90,8 +90,9 @@ include('conexao.php');
                     $nome = mysqli_real_escape_string($mysqli, trim($_POST['nome']));
                     $email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
                     $senha = mysqli_real_escape_string($mysqli, trim($_POST['senha']));
+                    $senha_criptografada = mysqli_real_escape_string($mysqli, password_hash(trim($_POST['senha']), PASSWORD_DEFAULT));
 
-                    $sql_code = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
+                    $sql_code = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha_criptografada')";
                     
                     mysqli_query($mysqli, $sql_code);
                     echo '<div class="alert alert-success" role="alert" >Cadastrado com Sucesso!</div>';

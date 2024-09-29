@@ -1,25 +1,30 @@
 <?php
 include('conexao.php');
 
-// Verifivando a existência do email e da senha
 if (isset($_POST['email']) && isset($_POST['senha'])) {
 
-    if (strlen($_POST['email']) == 0) {
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $senha = $mysqli->real_escape_string($_POST['senha']);
+
+    $sql_code = "SELECT * FROM usuarios WHERE email = '$email' LIMIT 1";
+    $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: ".$mysqli->error);
+
+    $usuario = $sql_query->fetch_assoc();
+
+    if ($usuario == null) {
+        echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 50%; transform: translate(-50%, 0); z-index: 5;">Email não encontrado.</p>';
+    } else if (strlen($_POST['email']) == 0) {
         echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 50%; transform: translate(-50%, 0); z-index: 5;">Preencha o campo de email.</p>';
     } else if (strlen($_POST['senha']) == 0) {
         echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 50%; transform: translate(-50%, 0); z-index: 5;">Preencha com a sua senha.</p>';
+    } else if (password_verify($senha, $usuario['senha']) == 0) {
+        echo '<p class="alert alert-danger m-4 w-25 position-absolute top-0" style="top: 20%; left: 50%; transform: translate(-50%, 0); z-index: 5;">Senha inválida.</p>';
     } else {
-        // Limpar a string da variável
-        $email = $mysqli->real_escape_string($_POST['email']);
-        $senha = $mysqli->real_escape_string($_POST['senha']);
-
-        $sql_code = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";
-        $sql_query = $mysqli->query($sql_code) or die("Falha na execução do código SQL: ".$mysqli->error);
 
         $quantidade = $sql_query->num_rows;
 
         if ($quantidade == 1) {
-            $usuario = $sql_query->fetch_assoc();
+            
 
             if (!isset($_SESSION)) {
                 session_start();
