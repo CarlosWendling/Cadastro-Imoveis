@@ -38,42 +38,63 @@ include('conexao.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>
-                            Adicionar Proprietário
+                            Visualizar Proprietário
                             <a href="gerenciar-proprietario.php" class="btn btn-danger float-end">Voltar</a>
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="acoes.php" method="post">
-                            <div class="mb-3">
-                                <label>Nome</label>
-                                <input type="text" name="nome" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Data de Nascimento</label>
-                                <input type="date" name="data_nascimento" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>CPF</label>
-                                <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00" autocomplete="off" minlength="11" maxlength="11" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="sexo">Sexo</label>
-                                <select class="form-select" name="sexo" required>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Feminino">Feminino</option>
-                                    <option value="Outro">Outro</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label>Telefone</label>
-                                <input type="text" name="telefone" class="form-control" placeholder="(00) 00000-0000" minlength="11" maxlength="11">
-                            </div>
-                            <div class="mb-3">
-                                <label>Email</label>
-                                <input type="text" name="email" class="form-control">
-                            </div>
-                            <button type="submit" name="adicionar_proprietario" class="btn btn-primary float-middle">Adicionar</button>
-                        </form>
+                        <?php
+                        if (isset($_GET['id'])) {
+                            $proprietario_id = mysqli_real_escape_string($mysqli, $_GET['id']);
+                            $sql_code = "SELECT * FROM proprietarios WHERE id = $proprietario_id";
+                            $query = mysqli_query($mysqli, $sql_code);
+
+                            if (mysqli_num_rows($query) > 0) {
+                                $proprietario = mysqli_fetch_array($query);
+                            }
+                        ?>
+
+                        <div class="mb-3">
+                            <label>Nome</label>
+                            <p class="form-control">
+                                <?=$proprietario['nome']?>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label>Data de Nascimento</label>
+                            <p class="form-control">
+                            <?=date('d/m/Y', strtotime($proprietario['data_nascimento']))?>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label>CPF</label>
+                            <p class="form-control">
+                            <?=$proprietario['cpf']?>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label>Sexo</label>
+                            <p class="form-control">
+                            <?=$proprietario['sexo']?>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label>Telefone</label>
+                            <p class="form-control">
+                            <?=$proprietario['telefone']?>
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <p class="form-control">
+                            <?=$proprietario['email']?>
+                            </p>
+                        </div>
+                        <?php
+                        } else {
+                            echo '<h5>Proprietário não encontrado.</h5>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
