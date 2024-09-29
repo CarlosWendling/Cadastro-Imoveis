@@ -54,7 +54,7 @@ include('conexao.php');
                             </div>
                             <div class="mb-3">
                                 <label>CPF</label>
-                                <input type="number" name="cpf" class="form-control" placeholder="000.000.000-00" autocomplete="off" required>
+                                <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00" autocomplete="off" minlength="11" maxlength="11" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="sexo">Sexo</label>
@@ -66,7 +66,7 @@ include('conexao.php');
                             </div>
                             <div class="mb-3">
                                 <label>Telefone</label>
-                                <input type="number" name="telefone" class="form-control" placeholder="(00) 00000-0000">
+                                <input type="text" name="telefone" class="form-control" placeholder="(00) 00000-0000" minlength="11" maxlength="11">
                             </div>
                             <div class="mb-3">
                                 <label>Email</label>
