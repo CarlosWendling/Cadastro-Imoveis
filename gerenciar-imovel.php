@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu</title>
+    <title>Imóveis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="src/style.css">
   </head>
@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-header" style="padding-top: 1.1rem;">
                         <h4>
-                            <span class="align-middle">Menu </span>
+                            <span class="align-middle">Imóveis </span>
                             <div class="dropdown" style="display: inline;">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Selecione
@@ -49,8 +49,43 @@
                                     <li><a class="dropdown-item" href="gerenciar-imovel.php">Imóveis</a></li>
                                 </ul>
                             </div>
-                            <a href="logout.php" class="btn btn-danger float-end">Sair</a>                  
+                            <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
+                            <a href="#" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Imóvel<a>
                         </h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Inscrição Municipal</th>
+                                    <th>Contribuinte</th>
+                                    <th>Bairro</th>
+                                    <th>Logadouro</th>
+                                    <th>Número</th>
+                                    <th>Complemento</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <a href="#" class="btn btn-secondary btn-sm">Visualizar</a>
+                                    <a href="#" class="btn btn-success btn-sm">Editar</a>
+                                    <form action="" method="post" class="d-inline">
+                                        <button type="submit" name="" value="" class="btn btn-danger btn-sm">
+                                            Excluir
+                                        </button>
+                                    </form>
+                                </td>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

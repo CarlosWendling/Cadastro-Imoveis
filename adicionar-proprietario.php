@@ -43,7 +43,7 @@ include('conexao.php');
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="acoes.php" method="post">
+                        <form action="acoes-proprietario.php" method="post">
                             <div class="mb-3">
                                 <label>Nome</label>
                                 <input type="text" name="nome" class="form-control" required>

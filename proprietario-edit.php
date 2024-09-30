@@ -54,7 +54,7 @@ include('conexao.php');
                             }
                         ?>
 
-                        <form action="acoes.php" method="post">
+                        <form action="acoes-proprietario.php" method="post">
                             <input type="hidden" name="usuario_id" value="<?=$proprietario['id']?>">
                             <div class="mb-3">
                                 <label>Nome</label>

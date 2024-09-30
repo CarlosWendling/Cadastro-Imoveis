@@ -45,8 +45,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="gerenciar-proprietario">Proprietários</a></li>
-                                    <li><a class="dropdown-item" href="#">Imóveis</a></li>
+                                    <li><a class="dropdown-item" href="gerenciar-proprietario.php">Proprietários</a></li>
+                                    <li><a class="dropdown-item" href="gerenciar-imovel.php">Imóveis</a></li>
                                 </ul>
                             </div>
                             <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
@@ -86,7 +86,7 @@
                                     <td>
                                         <a href="proprietario-view.php?id=<?=$proprietario['id']?>" class="btn btn-secondary btn-sm">Visualizar</a>
                                         <a href="proprietario-edit.php?id=<?=$proprietario['id']?>" class="btn btn-success btn-sm">Editar</a>
-                                        <form onclick="return confirm('Tem certeza que deseja excluir esse proprietário?')" action="acoes.php" method="post" class="d-inline">
+                                        <form onclick="return confirm('Tem certeza que deseja excluir esse proprietário?')" action="acoes-proprietario.php" method="post" class="d-inline">
                                             <button type="submit" name="delete_proprietario" value="<?=$proprietario['id']?>" class="btn btn-danger btn-sm">
                                                 Excluir
                                             </button>
