@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                             <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
-                            <a href="#" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Imóvel<a>
+                            <a href="adicionar-imovel.php" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Imóvel<a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -68,7 +68,6 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
