@@ -107,8 +107,8 @@
                                     <td>
                                         <a href="imovel-view.php?inscricao_municipal=<?=$imovel['inscricao_municipal']?>" class="btn btn-secondary btn-sm">Visualizar</a>
                                         <a href="imovel-edit.php?inscricao_municipal=<?=$imovel['inscricao_municipal']?>" class="btn btn-success btn-sm">Editar</a>
-                                        <form action="" method="post" class="d-inline">
-                                            <button type="submit" name="" value="" class="btn btn-danger btn-sm">
+                                        <form onclick="return confirm('Tem certeza que deseja excluir esse imóvel?')" action="acoes-imovel.php" method="post" class="d-inline">
+                                            <button type="submit" name="delete_imovel" value="<?=$imovel['inscricao_municipal']?>" class="btn btn-danger btn-sm">
                                                 Excluir
                                             </button>
                                         </form>

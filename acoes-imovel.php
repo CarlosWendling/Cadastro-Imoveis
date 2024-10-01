@@ -24,8 +24,14 @@ if (isset($_POST['adicionar_imovel'])) {
     
         mysqli_query($mysqli, $sql_code);
         
-        $_SESSION['msg-success'] = 'Imóvel cadastrado com sucesso';
-        header("Location: gerenciar-imovel.php");
+        if (mysqli_affected_rows($mysqli) > 0) {
+            $_SESSION['msg-success'] = 'Imóvel cadastrado com sucesso';
+            header("Location: gerenciar-imovel.php");
+        } else {
+            $_SESSION['msg-fail'] = '[ERRO] Imóvel não foi cadastrado';
+            header("Location: gerenciar-imovel.php");
+            exit;
+        }
     }
 }
 
@@ -54,9 +60,31 @@ if (isset($_POST['update_imovel'])) {
     
         mysqli_query($mysqli, $sql_code);
         
-        $_SESSION['msg-success'] = 'Imóvel atualizado com sucesso';
-        header("Location: gerenciar-imovel.php");
+        if (mysqli_affected_rows($mysqli) > 0) {
+            $_SESSION['msg-success'] = 'Imóvel atualizado com sucesso';
+            header("Location: gerenciar-imovel.php");
+        } else {
+            $_SESSION['msg-fail'] = '[ERRO] Imóvel não foi atualizado';
+            header("Location: gerenciar-imovel.php");
+            exit;
+        }
     }
-    
+}
+
+if (isset($_POST['delete_imovel'])) {
+    $inscricao_municipal = $mysqli->real_escape_string($_POST['delete_imovel']);
+
+    $sql_code = "DELETE FROM imoveis WHERE inscricao_municipal = '$inscricao_municipal'";
+
+    mysqli_query($mysqli, $sql_code);
+
+    if (mysqli_affected_rows($mysqli) > 0) {
+        $_SESSION['msg-success'] = 'Imóvel removido com sucesso';
+        header("Location: gerenciar-imovel.php");
+    } else {
+        $_SESSION['msg-fail'] = '[ERRO] Imóvel não foi removido';
+        header("Location: gerenciar-imovel.php");
+        exit;
+    }
 }
 ?>
