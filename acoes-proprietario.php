@@ -14,7 +14,14 @@ if (isset($_POST['adicionar_proprietario'])) {
     
     mysqli_query($mysqli, $sql_code);
     
-    header("Location: gerenciar-proprietario.php");
+    if (mysqli_affected_rows($mysqli) > 0) {
+        $_SESSION['msg-success'] = 'Proprietário cadastrado com sucesso';
+        header("Location: gerenciar-proprietario.php");
+    } else {
+        $_SESSION['msg-fail'] = '[ERRO] Proprietário não foi cadastrado';
+        header("Location: gerenciar-proprietario.php");
+        exit;
+    }
     
 }
 

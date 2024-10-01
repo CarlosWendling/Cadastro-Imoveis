@@ -33,6 +33,29 @@
     </nav>
 
     <div class="container mt-4">
+    <?php
+        if (isset($_SESSION['msg-success'])):
+        ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $_SESSION['msg-success']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+            unset($_SESSION['msg-success']);
+            endif;
+        ?>
+        
+    <?php
+        if (isset($_SESSION['msg-fail'])):
+        ?>
+        <div class="alert alert-denger alert-dismissible fade show" role="alert">
+            <?= $_SESSION['msg-fail']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+            unset($_SESSION['msg-fail']);
+            endif;
+        ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
