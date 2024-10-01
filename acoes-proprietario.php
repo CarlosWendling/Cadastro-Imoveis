@@ -41,7 +41,14 @@ if (isset($_POST['update_proprietario'])) {
     
     mysqli_query($mysqli, $sql_code);
     
-    header("Location: gerenciar-proprietario.php");
+    if (mysqli_affected_rows($mysqli) > 0) {
+        $_SESSION['msg-success'] = 'Proprietário atualizado com sucesso';
+        header("Location: gerenciar-proprietario.php");
+    } else {
+        $_SESSION['msg-fail'] = '[ERRO] Proprietário não foi atualizado';
+        header("Location: gerenciar-proprietario.php");
+        exit;
+    }
     
 }
 
@@ -52,6 +59,13 @@ if (isset($_POST['delete_proprietario'])) {
 
     mysqli_query($mysqli, $sql_code);
 
-    header("Location: gerenciar-proprietario.php");
+    if (mysqli_affected_rows($mysqli) > 0) {
+        $_SESSION['msg-success'] = 'Proprietário removido com sucesso';
+        header("Location: gerenciar-proprietario.php");
+    } else {
+        $_SESSION['msg-fail'] = '[ERRO] Proprietário não foi removido';
+        header("Location: gerenciar-proprietario.php");
+        exit;
+    }
 }
 ?>
