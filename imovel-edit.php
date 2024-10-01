@@ -8,7 +8,7 @@ include('conexao.php');
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Proprietários</title>
+    <title>Imóveis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="src/style.css">
   </head>
@@ -38,58 +38,49 @@ include('conexao.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>
-                            Editar Proprietário
-                            <a href="gerenciar-proprietario.php" class="btn btn-danger float-end">Voltar</a>
+                            Atualizar Imóvel
+                            <a href="gerenciar-imovel.php" class="btn btn-danger float-end">Voltar</a>
                         </h4>
                     </div>
                     <div class="card-body">
                     <?php
-                        if (isset($_GET['id'])) {
-                            $proprietario_id = mysqli_real_escape_string($mysqli, $_GET['id']);
-                            $sql_code = "SELECT * FROM proprietarios WHERE id = '$proprietario_id'";
+                        if (isset($_GET['inscricao_municipal'])) {
+                            $inscricao_municipal = mysqli_real_escape_string($mysqli, $_GET['inscricao_municipal']);
+                            $sql_code = "SELECT * FROM imoveis WHERE inscricao_municipal = '$inscricao_municipal'";
                             $query = mysqli_query($mysqli, $sql_code);
 
                             if (mysqli_num_rows($query) > 0) {
-                                $proprietario = mysqli_fetch_array($query);
+                                $imovel = mysqli_fetch_array($query);
                             }
                         ?>
 
-                        <form action="acoes-proprietario.php" method="post">
-                            <input type="hidden" name="proprietario_id" value="<?=$proprietario['id']?>">
+                        <form action="acoes-imovel.php" method="post">
+                        <input type="hidden" name="inscricao_municipal" value="<?=$imovel['inscricao_municipal']?>">
                             <div class="mb-3">
-                                <label>Nome</label>
-                                <input type="text" name="nome" value="<?=$proprietario['nome']?>" class="form-control" required>
+                                <label>Id do Contribuinte</label>
+                                <input type="number" name="id_contribuinte" class="form-control" min="1" required>
                             </div>
                             <div class="mb-3">
-                                <label>Data de Nascimento</label>
-                                <input type="date" name="data_nascimento" value="<?=$proprietario['data_nascimento']?>" class="form-control" required>
+                                <label>Bairro</label>
+                                <input type="text" name="bairro" value="<?=$imovel['bairro']?>" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label>CPF</label>
-                                <input type="text" name="cpf" class="form-control" value="<?=$proprietario['cpf']?>" placeholder="000.000.000-00" autocomplete="off" minlength="11" maxlength="11" required>
+                                <label>Logadouro</label>
+                                <input type="text" name="logadouro" value="<?=$imovel['logadouro']?>" class="form-control" placeholder="Avenida ou Rua" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="sexo">Sexo</label>
-                                <select class="form-select" name="sexo" required>
-                                    <option value="<?=$proprietario['sexo']?>">Atual: <?=$proprietario['sexo']?></option>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Feminino">Feminino</option>
-                                    <option value="Outro">Outro</option>
-                                </select>
+                                <label>Número</label>
+                                <input type="number" name="numero" value="<?=$imovel['numero']?>" class="form-control" min="1" required>
                             </div>
                             <div class="mb-3">
-                                <label>Telefone</label>
-                                <input type="text" name="telefone" class="form-control" value="<?=$proprietario['telefone']?>" placeholder="(00) 00000-0000" minlength="11" maxlength="11">
+                                <label>Complemento</label>
+                                <input type="text" name="complemento" value="<?=$imovel['complemento']?>" class="form-control" placeholder="Ex: Casa 18">
                             </div>
-                            <div class="mb-3">
-                                <label>Email</label>
-                                <input type="text" name="email" value="<?=$proprietario['email']?>" class="form-control">
-                            </div>
-                            <button type="submit" name="update_proprietario" class="btn btn-primary float-middle">Atualizar</button>
+                            <button type="submit" name="update_imovel" class="btn btn-primary float-middle">Atualizar</button>
                         </form>
                         <?php
                         } else {
-                            echo '<h5>Proprietário não encontrado</h5>';
+                            echo '<h5>Imóvel não encontrado</h5>';
                         }
                         ?>
                     </div>
