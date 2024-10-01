@@ -105,7 +105,7 @@
                                     <td><?=$imovel['numero']?></td>
                                     <td><?=$imovel['complemento']?></td>
                                     <td>
-                                        <a href="#" class="btn btn-secondary btn-sm">Visualizar</a>
+                                        <a href="imovel-view.php?inscricao_municipal=<?=$imovel['inscricao_municipal']?>" class="btn btn-secondary btn-sm">Visualizar</a>
                                         <a href="#" class="btn btn-success btn-sm">Editar</a>
                                         <form action="" method="post" class="d-inline">
                                             <button type="submit" name="" value="" class="btn btn-danger btn-sm">

@@ -8,7 +8,7 @@ include('conexao.php');
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Proprietários</title>
+    <title>Imóveis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="src/style.css">
   </head>
@@ -38,61 +38,54 @@ include('conexao.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>
-                            Visualizar Proprietário
-                            <a href="gerenciar-proprietario.php" class="btn btn-danger float-end">Voltar</a>
+                            Visualizar Imóvel
+                            <a href="gerenciar-imovel.php" class="btn btn-danger float-end">Voltar</a>
                         </h4>
                     </div>
                     <div class="card-body">
-                        <?php
-                        if (isset($_GET['id'])) {
-                            $proprietario_id = mysqli_real_escape_string($mysqli, $_GET['id']);
-                            $sql_code = "SELECT * FROM proprietarios WHERE id = $proprietario_id";
+                    <?php
+                        if (isset($_GET['inscricao_municipal'])) {
+                            $inscricao_municipal = mysqli_real_escape_string($mysqli, $_GET['inscricao_municipal']);
+                            $sql_code = "SELECT * FROM imoveis WHERE inscricao_municipal = '$inscricao_municipal'";
                             $query = mysqli_query($mysqli, $sql_code);
 
                             if (mysqli_num_rows($query) > 0) {
-                                $proprietario = mysqli_fetch_array($query);
+                                $imovel = mysqli_fetch_array($query);
                             }
                         ?>
-
                         <div class="mb-3">
-                            <label>Nome</label>
+                            <label>Contribuinte</label>
                             <p class="form-control">
-                                <?=$proprietario['nome']?>
+                                <?=$imovel['contribuinte']?>
                             </p>
                         </div>
                         <div class="mb-3">
-                            <label>Data de Nascimento</label>
+                            <label>Bairro</label>
                             <p class="form-control">
-                            <?=date('d/m/Y', strtotime($proprietario['data_nascimento']))?>
+                                <?=$imovel['bairro']?>
                             </p>
                         </div>
                         <div class="mb-3">
-                            <label>CPF</label>
+                            <label>Logadouro</label>
                             <p class="form-control">
-                            <?=$proprietario['cpf']?>
+                                <?=$imovel['logadouro']?>
                             </p>
                         </div>
                         <div class="mb-3">
-                            <label>Sexo</label>
+                            <label>Número</label>
                             <p class="form-control">
-                            <?=$proprietario['sexo']?>
+                                <?=$imovel['numero']?>
                             </p>
                         </div>
                         <div class="mb-3">
-                            <label>Telefone</label>
+                            <label>Complemento</label>
                             <p class="form-control">
-                            <?=$proprietario['telefone']?>
-                            </p>
-                        </div>
-                        <div class="mb-3">
-                            <label>Email</label>
-                            <p class="form-control">
-                            <?=$proprietario['email']?>
+                                <?=$imovel['complemento']?>
                             </p>
                         </div>
                         <?php
                         } else {
-                            echo '<h5>Proprietário não encontrado</h5>';
+                            echo '<h5>Imóvel não encontrado</h5>';
                         }
                         ?>
                     </div>
