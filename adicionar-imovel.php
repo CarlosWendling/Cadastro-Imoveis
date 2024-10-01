@@ -43,10 +43,14 @@ include('conexao.php');
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="acoes-imovel.php" method="post">
                             <div class="mb-3">
                                 <label>Contribuinte</label>
-                                <input type="text" name="contribuinte" class="form-control" placeholder="Dono do Imóvel" required>
+                                <input type="text" name="nome_contribuinte" class="form-control" placeholder="Dono do Imóvel" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Id do Contribuinte</label>
+                                <input type="number" name="id_contribuinte" class="form-control" min="1" required>
                             </div>
                             <div class="mb-3">
                                 <label>Bairro</label>
@@ -64,7 +68,7 @@ include('conexao.php');
                                 <label>Complemento</label>
                                 <input type="text" name="complemento" class="form-control" placeholder="Ex: Casa 18">
                             </div>
-                            <button type="submit" name="" class="btn btn-primary float-middle">Adicionar</button>
+                            <button type="submit" name="adicionar_imovel" class="btn btn-primary float-middle">Adicionar</button>
                         </form>
                     </div>
                 </div>

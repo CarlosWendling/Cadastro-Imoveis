@@ -19,7 +19,7 @@ if (isset($_POST['adicionar_proprietario'])) {
 }
 
 if (isset($_POST['update_proprietario'])) {
-    $usuario_id = mysqli_real_escape_string($mysqli, $_POST['usuario_id']);
+    $proprietario_id = mysqli_real_escape_string($mysqli, $_POST['proprietario_id']);
 
     $nome = mysqli_real_escape_string($mysqli, trim($_POST['nome']));
     $data_nascimento = mysqli_real_escape_string($mysqli, trim($_POST['data_nascimento']));
@@ -30,7 +30,7 @@ if (isset($_POST['update_proprietario'])) {
 
     $sql_code = "UPDATE proprietarios SET nome = '$nome', data_nascimento = '$data_nascimento', cpf = '$cpf', sexo = '$sexo', telefone = '$telefone', email = '$email'";
 
-    $sql_code .= "WHERE id = '$usuario_id'";
+    $sql_code .= "WHERE id = '$proprietario_id'";
     
     mysqli_query($mysqli, $sql_code);
     
@@ -39,9 +39,9 @@ if (isset($_POST['update_proprietario'])) {
 }
 
 if (isset($_POST['delete_proprietario'])) {
-    $usuario_id = mysqli_real_escape_string($mysqli, $_POST['delete_proprietario']);
+    $proprietario_id = mysqli_real_escape_string($mysqli, $_POST['delete_proprietario']);
     
-    $sql_code = "DELETE FROM proprietarios WHERE id = '$usuario_id'";
+    $sql_code = "DELETE FROM proprietarios WHERE id = '$proprietario_id'";
 
     mysqli_query($mysqli, $sql_code);
 
