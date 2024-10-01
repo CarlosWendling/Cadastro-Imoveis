@@ -102,7 +102,6 @@ include('conexao.php');
             <div class="mb-3">
                 <label for="cadastro-nome" class="form-label">Nome Completo</label>
                 <input type="text" class="form-control" id="cadastro-nome" name="nome" required>
-                <p class="fail-email" style="color: red; font-size: 0.6rem;"></p>
             </div>
             <div class="mb-3">
                 <label for="cadastro-email" class="form-label">Email</label>
