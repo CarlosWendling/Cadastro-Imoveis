@@ -11,7 +11,9 @@ if (isset($_POST['adicionar_imovel'])) {
     $contribuinte = $sql_query->fetch_assoc();
     
     if ($contribuinte == null) {
-        echo 'Contribuinte nulo'; exit;
+        $_SESSION['msg'] = 'Imóvel não cadastrado. O contribuinte não foi encontrado.';
+        header("Location: gerenciar-imovel.php");
+        exit;
     } else {
         $bairro = mysqli_real_escape_string($mysqli, trim($_POST['bairro']));
         $logadouro = mysqli_real_escape_string($mysqli, trim($_POST['logadouro']));
@@ -22,6 +24,7 @@ if (isset($_POST['adicionar_imovel'])) {
     
         mysqli_query($mysqli, $sql_code);
         
+        $_SESSION['msg'] = 'Imóvel cadastrado com sucesso.';
         header("Location: gerenciar-imovel.php");
     }
 }

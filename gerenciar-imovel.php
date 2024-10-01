@@ -33,6 +33,17 @@
     </nav>
 
     <div class="container mt-4">
+        <?php
+            if (isset($_SESSION['msg'])):
+        ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?= $_SESSION['msg']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+            unset($_SESSION['msg']);
+            endif;
+        ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -67,22 +78,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary btn-sm">Visualizar</a>
-                                    <a href="#" class="btn btn-success btn-sm">Editar</a>
-                                    <form action="" method="post" class="d-inline">
-                                        <button type="submit" name="" value="" class="btn btn-danger btn-sm">
-                                            Excluir
-                                        </button>
-                                    </form>
-                                </td>
+                            <?php
+                                    $sql_code = 'SELECT * FROM imoveis';
+                                    $imoveis = mysqli_query($mysqli, $sql_code);
+
+                                    if (mysqli_num_rows($imoveis) > 0) {
+                                        foreach($imoveis as $imovel) {       
+                                ?>
+                                <tr>
+                                    <td><?=$imovel['inscricao_municipal']?></td>
+                                    <td><?=$imovel['contribuinte']?></td>
+                                    <td><?=$imovel['bairro']?></td>
+                                    <td><?=$imovel['logadouro']?></td>
+                                    <td><?=$imovel['numero']?></td>
+                                    <td><?=$imovel['complemento']?></td>
+                                    <td>
+                                        <a href="#" class="btn btn-secondary btn-sm">Visualizar</a>
+                                        <a href="#" class="btn btn-success btn-sm">Editar</a>
+                                        <form action="" method="post" class="d-inline">
+                                            <button type="submit" name="" value="" class="btn btn-danger btn-sm">
+                                                Excluir
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php
+                                 }
+                                } else {
+                                    echo '<h5>Nenhum Imóvel encontrado</5>';
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
