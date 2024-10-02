@@ -60,7 +60,6 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" style="padding-top: 1.1rem;">
-                            <span class="align-middle">Proprietários </span>
                         <h4 class="d-flex" style="justify-content: space-between; align-items: center; flex-wrap: wrap;">
                             <div>
                                 <span class="align-middle">Proprietários </span>
