@@ -41,15 +41,7 @@ include('conexao.php');
             <?php
                 $error = 0;
 
-                if (isset($_POST['nome'])) {
-                    $nome = $_POST['nome'];
-                    if (strlen($nome) < 6) {
-                        $error += 1;
-                        echo '<p class="alert alert-danger">O nome deve ter, no mínimo, 6 caracteres.</p>';
-                    }
-                }
-
-                if (isset($_POST['email'])) {
+                    if (isset($_POST['email'])) {
                     $email = $_POST['email'];
 
                     $sql_code = "SELECT * FROM usuarios WHERE email = '$email'";
@@ -69,12 +61,12 @@ include('conexao.php');
                     $senha = $_POST['senha'];
                     $confirmSenha = $_POST['confirm-senha'];
 
-                    if (strlen($senha) < 7) {
-                        $error += 1;
-                        echo '<p class="alert alert-danger">Senha muito curta.</p>';
-                    } else if (!preg_match('/[a-z]/', $senha)) {
+                    if (!preg_match('/[a-z]/', $senha)) {
                         $error += 1;
                         echo '<p class="alert alert-danger">Senha não contém letras minúsculas.</p>';
+                    } else if (!preg_match('/[A-Z]/', $senha)) {
+                        $error += 1;
+                        echo '<p class="alert alert-danger">Senha não contém letras maiúsculas.</p>';
                     } else if (!preg_match('/[0-9]/', $senha)) {
                         $error += 1;
                         echo '<p class="alert alert-danger">Senha não contém números.</p>';
@@ -101,7 +93,7 @@ include('conexao.php');
 
             <div class="mb-3">
                 <label for="cadastro-nome" class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="cadastro-nome" name="nome" required>
+                <input type="text" class="form-control" id="cadastro-nome" name="nome" minlength="6" required>
             </div>
             <div class="mb-3">
                 <label for="cadastro-email" class="form-label">Email</label>
@@ -109,11 +101,11 @@ include('conexao.php');
             </div>
             <div class="mb-3">
                 <label for="cadastro-pass" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="cadastro-pass" name="senha" required>
+                <input type="password" class="form-control" id="cadastro-pass" name="senha" minlength="8" required>
             </div>
             <div class="mb-3">
                 <label for="confirm-pass" class="form-label">Confirme a Senha</label>
-                <input type="password" class="form-control" id="confirm-pass" name="confirm-senha" required>
+                <input type="password" class="form-control" id="confirm-pass" name="confirm-senha" minlength="8" required>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary form-control" name="cadastrar" style="margin-top: 0.4rem;">Cadastrar</button>
