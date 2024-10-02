@@ -60,20 +60,28 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" style="padding-top: 1.1rem;">
-                        <h4>
-                            <span class="align-middle">Imóveis </span>
-                            <div class="dropdown" style="display: inline;">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Selecione
-                                </a>
+                        <h4 class="d-flex" style="justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <div>
+                                <span class="align-middle">Imóveis </span>
+                                <div class="dropdown d-inline">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Selecione
+                                    </a>
 
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="gerenciar-proprietario.php">Proprietários</a></li>
-                                    <li><a class="dropdown-item" href="gerenciar-imovel.php">Imóveis</a></li>
-                                </ul>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="gerenciar-proprietario.php">Proprietários</a></li>
+                                        <li><a class="dropdown-item" href="gerenciar-imovel.php">Imóveis</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
-                            <a href="adicionar-imovel.php" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Imóvel<a>
+                            <div class="d-inline" style="width: 35%;">
+                                <input type="search" name="pesquisa" class="form-control d-inline" placeholder="Busque um imóvel aqui" style="width: 80%;">
+                                <button type="button" class="btn btn-primary float-end">Buscar</button>
+                            </div>
+                            <div>
+                                <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
+                                <a href="adicionar-imovel.php" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Imóvel</a>
+                            </div>
                         </h4>
                     </div>
                     <div class="card-body">
