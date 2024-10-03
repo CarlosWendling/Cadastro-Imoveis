@@ -74,10 +74,10 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="d-inline" style="width: 35%;">
-                                <input type="search" name="pesquisa" class="form-control d-inline" placeholder="Busque um imóvel aqui" style="width: 80%;">
-                                <button type="button" class="btn btn-primary float-end">Buscar</button>
-                            </div>
+                            <form class="d-inline" style="width: 35%;">
+                                <input type="search" name="busca" class="form-control d-inline" placeholder="Busque um imóvel aqui" style="width: 80%;">
+                                <button type="submit" class="btn btn-primary float-end">Buscar</button>
+                            </form>
                             <div>
                                 <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
                                 <a href="adicionar-imovel.php" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Imóvel</a>
@@ -99,12 +99,13 @@
                             </thead>
                             <tbody>
                             <?php
-                                    $sql_code = 'SELECT * FROM imoveis';
-                                    $imoveis = mysqli_query($mysqli, $sql_code);
+                            $sql_code = 'SELECT * FROM imoveis';
+                            $imoveis = mysqli_query($mysqli, $sql_code);
 
-                                    if (mysqli_num_rows($imoveis) > 0) {
+                            if (!isset($_GET['busca'])) {
+                                if (mysqli_num_rows($imoveis) > 0) {
                                         foreach($imoveis as $imovel) {       
-                                ?>
+                            ?>
                                 <tr>
                                     <td><?=$imovel['inscricao_municipal']?></td>
                                     <td><?=$imovel['contribuinte']?></td>
@@ -123,10 +124,50 @@
                                     </td>
                                 </tr>
                                 <?php
-                                 }
+                                    }
+                                        } else {
+                                            echo '<h5>Nenhum Imóvel encontrado</5>';
+                                        }
                                 } else {
-                                    echo '<h5>Nenhum Imóvel encontrado</5>';
-                                }
+                                    // CAMPO DE BUSCA
+                                    $pesquisa = $mysqli->real_escape_string($_GET['busca']);
+
+                                    $sql_code = "SELECT *
+                                        FROM imoveis
+                                        WHERE contribuinte LIKE '%$pesquisa%'
+                                        OR bairro LIKE '%$pesquisa%'
+                                        OR logadouro LIKE '%$pesquisa%'
+                                        OR numero LIKE '%$pesquisa%'
+                                        OR complemento LIKE '%$pesquisa%'";
+
+                                    $consultas = mysqli_query($mysqli, $sql_code);
+
+                                    if (mysqli_num_rows($consultas) == 0) {
+                                        echo '<h5>Nenhum Imóvel encontrado na busca</5>';
+                                    } else {
+                                        foreach ($consultas as $consulta) {
+                                        ?>
+                                            <tr>
+                                                <td><?=$consulta['inscricao_municipal']?></td>
+                                                <td><?=$consulta['contribuinte']?></td>
+                                                <td><?=$consulta['bairro']?></td>
+                                                <td><?=$consulta['logadouro']?></td>
+                                                <td><?=$consulta['numero']?></td>
+                                                <td><?=$consulta['complemento']?></td>
+                                                <td>
+                                                    <a href="proprietario-view.php?id=<?=$consulta['inscricao_municipal']?>" class="btn btn-secondary btn-sm">Visualizar</a>
+                                                    <a href="proprietario-edit.php?id=<?=$consulta['inscricao_municipal']?>" class="btn btn-success btn-sm">Editar</a>
+                                                    <form onclick="return confirm('Tem certeza que deseja excluir esse proprietário?')" action="acoes-proprietario.php" method="post" class="d-inline">
+                                                        <button type="submit" name="delete_proprietario" value="<?=$consulta['inscricao_municipal']?>" class="btn btn-danger btn-sm">
+                                                            Excluir
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                    }
+                                    }
+                                }                           
                                 ?>
                             </tbody>
                         </table>

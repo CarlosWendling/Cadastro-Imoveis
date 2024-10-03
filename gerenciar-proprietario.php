@@ -74,10 +74,10 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="d-inline" style="width: 35%;">
-                                <input type="search" name="pesquisa" class="form-control d-inline" placeholder="Busque um proprietário aqui" style="width: 80%;">
-                                <button type="button" class="btn btn-primary float-end">Buscar</button>
-                            </div>
+                            <form class="d-inline" style="width: 35%;">
+                                <input type="search" name="busca" class="form-control d-inline" placeholder="Consulte um proprietário aqui" style="width: 80%;">
+                                <button type="submit" class="btn btn-primary float-end">Buscar</button>
+                            </form>
                             <div>
                                 <a href="logout.php" class="btn btn-danger float-end">Sair</a>                 
                                 <a href="adicionar-proprietario.php" class="btn btn-primary float-end" style="margin-right: 1rem;">Adicionar Proprietário</a>
@@ -85,6 +85,10 @@
                         </h4>
                     </div>
                     <div class="card-body">
+                        <?php
+                            $sql_code = "SELECT * FROM proprietarios";
+                            $proprietarios = mysqli_query($mysqli, $sql_code);
+                        ?>
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -100,9 +104,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $sql_code = 'SELECT * FROM proprietarios';
-                                    $proprietarios = mysqli_query($mysqli, $sql_code);
-
+                                if (!isset($_GET['busca'])) {
                                     if (mysqli_num_rows($proprietarios) > 0) {
                                         foreach($proprietarios as $proprietario) {       
                                 ?>
@@ -125,10 +127,52 @@
                                     </td>
                                 </tr>
                                 <?php
-                                 }
+                                    } 
+                                        } else {
+                                            echo '<h5>Nenhum Proprietário encontrado</5>';
+                                        }
                                 } else {
-                                    echo '<h5>Nenhum Proprietário encontrado</5>';
-                                }
+                                    // CAMPO DE BUSCA
+                                    $pesquisa = $mysqli->real_escape_string($_GET['busca']);
+
+                                    $sql_code = "SELECT *
+                                        FROM proprietarios
+                                        WHERE nome LIKE '%$pesquisa%'
+                                        OR data_nascimento LIKE '%$pesquisa%'
+                                        OR cpf LIKE '%$pesquisa%'
+                                        OR sexo LIKE '%$pesquisa%'
+                                        OR telefone LIKE '%$pesquisa%'
+                                        OR email LIKE '%$pesquisa%'";
+
+                                    $consultas = mysqli_query($mysqli, $sql_code);
+
+                                    if (mysqli_num_rows($consultas) == 0) {
+                                        echo '<h5>Nenhum Proprietário encontrado na busca</5>';
+                                    } else {
+                                        foreach ($consultas as $consulta) {
+                                        ?>
+                                            <tr>
+                                                <td><?=$consulta['id']?></td>
+                                                <td><?=$consulta['nome']?></td>
+                                                <td><?=date('d/m/Y', strtotime($consulta['data_nascimento']))?></td>
+                                                <td><?=$consulta['cpf']?></td>
+                                                <td><?=$consulta['sexo']?></td>
+                                                <td><?=$consulta['telefone']?></td>
+                                                <td><?=$consulta['email']?></td>
+                                                <td>
+                                                    <a href="proprietario-view.php?id=<?=$consulta['id']?>" class="btn btn-secondary btn-sm">Visualizar</a>
+                                                    <a href="proprietario-edit.php?id=<?=$consulta['id']?>" class="btn btn-success btn-sm">Editar</a>
+                                                    <form onclick="return confirm('Tem certeza que deseja excluir esse proprietário?')" action="acoes-proprietario.php" method="post" class="d-inline">
+                                                        <button type="submit" name="delete_proprietario" value="<?=$consulta['id']?>" class="btn btn-danger btn-sm">
+                                                            Excluir
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                    }
+                                    }
+                                }                           
                                 ?>
                             </tbody>
                         </table>
