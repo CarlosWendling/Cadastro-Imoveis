@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <form class="d-inline" style="width: 35%;">
-                                <input type="search" name="busca" class="form-control d-inline" placeholder="Busque um imóvel aqui" style="width: 80%;">
+                                <input type="search" name="busca" value="<?php if(isset($_GET['busca'])) echo $_GET['busca']?>" class="form-control d-inline" placeholder="Busque um imóvel aqui" style="width: 80%;">
                                 <button type="submit" class="btn btn-primary float-end">Buscar</button>
                             </form>
                             <div>
