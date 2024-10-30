@@ -49,8 +49,14 @@ include('conexao.php');
                             $sql_code = "SELECT * FROM imoveis WHERE inscricao_municipal = '$inscricao_municipal'";
                             $query = mysqli_query($mysqli, $sql_code);
 
+                            $proprietarios = NULL;
+                            
+
                             if (mysqli_num_rows($query) > 0) {
                                 $imovel = mysqli_fetch_array($query);
+
+                                $sql = "SELECT id, nome FROM proprietarios";
+                                $sql_query = mysqli_query($mysqli, $sql);
                             }
                         ?>
 
@@ -58,7 +64,19 @@ include('conexao.php');
                         <input type="hidden" name="inscricao_municipal" value="<?=$imovel['inscricao_municipal']?>">
                             <div class="mb-3">
                                 <label>Id do Contribuinte</label>
-                                <input type="number" name="id_contribuinte" class="form-control" min="1" required>
+                                    <select name="id_contribuinte" class="form-control" required>
+                                        <?php
+                                            if (mysqli_num_rows($sql_query) > 0) {
+                                                while($proprietarios = mysqli_fetch_assoc($sql_query)) {
+                                                    if ($proprietarios['id'] == $imovel['contribuinte_id']) {
+                                                        echo '<option selected value="'.$proprietarios['id'].'">'.$proprietarios['nome'].'</option>';
+                                                    } else {
+                                                        echo '<option value="'.$proprietarios['id'].'">'.$proprietarios['nome'].'</option>';
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                    </select>
                             </div>
                             <div class="mb-3">
                                 <label>Bairro</label>

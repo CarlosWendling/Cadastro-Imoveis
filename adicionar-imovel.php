@@ -44,9 +44,21 @@ include('conexao.php');
                     </div>
                     <div class="card-body">
                         <form action="acoes-imovel.php" method="post">
+                            <?php
+                                $sql_code = "SELECT * FROM proprietarios";
+                                $proprietarios = mysqli_query($mysqli, $sql_code);
+                            ?>
                             <div class="mb-3">
                                 <label>Id do Contribuinte</label>
-                                <input type="number" name="id_contribuinte" class="form-control" min="1" required>
+                                <select name="id_contribuinte" class="form-control" required>
+                                    <?php
+                                        if (mysqli_num_rows($proprietarios) > 0) {
+                                            foreach($proprietarios as $proprietario) {
+                                                echo '<option value="'.$proprietario['id'].'">'.$proprietario['nome'].'</option>';
+                                            }
+                                        }
+                                    ?>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label>Bairro</label>
